@@ -15,5 +15,9 @@ namespace SimpleBank.Data
         }
 
         public DbSet<SimpleBank.Models.BankAccount> BankAccount { get; set; }
+
+        public DbSet<SimpleBank.Models.User> User { get; set; }
+
+        public DbSet<SimpleBank.Models.Transaction> Transaction { get; set; }
     }
 }

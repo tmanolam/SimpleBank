@@ -14,14 +14,13 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BankAccount.IBAN" class="control-label"></label>
-                <input asp-for="BankAccount.IBAN" class="form-control" />
-                <span asp-validation-for="BankAccount.IBAN" class="text-danger"></span>
+                <label asp-for="BankAccount.BankAccountID" class="control-label"></label>
+                <input asp-for="BankAccount.BankAccountID" class="form-control" />
+                <span asp-validation-for="BankAccount.BankAccountID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BankAccount.OwnerID" class="control-label"></label>
-                <input asp-for="BankAccount.OwnerID" class="form-control" />
-                <span asp-validation-for="BankAccount.OwnerID" class="text-danger"></span>
+                <label asp-for="BankAccount.UserID" class="control-label"></label>
+                <select asp-for="BankAccount.UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="BankAccount.Balance" class="control-label"></label>

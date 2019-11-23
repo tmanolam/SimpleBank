@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SimpleBank.Data;
 using SimpleBank.Models;
 
-namespace SimpleBank.Pages.BankAccounts
+namespace SimpleBank.Pages.Users
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +21,11 @@ namespace SimpleBank.Pages.BankAccounts
 
         public IActionResult OnGet()
         {
-        ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
             return Page();
         }
 
         [BindProperty]
-        public BankAccount BankAccount { get; set; }
+        public User User { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -37,7 +36,7 @@ namespace SimpleBank.Pages.BankAccounts
                 return Page();
             }
 
-            _context.BankAccount.Add(BankAccount);
+            _context.User.Add(User);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

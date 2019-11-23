@@ -1,0 +1,66 @@
+﻿@page
+@model SimpleBank.Pages.Transactions.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].CreditType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].DebitType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].PreviousBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].NewBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].Account)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Transaction) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DebitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.BankAccountID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.TransactionID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.TransactionID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TransactionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

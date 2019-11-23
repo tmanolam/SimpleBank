@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleBank.Data;
 using SimpleBank.Models;
 
-namespace SimpleBank.Pages.BankAccounts
+namespace SimpleBank.Pages.Users
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace SimpleBank.Pages.BankAccounts
             _context = context;
         }
 
-        public BankAccount BankAccount { get; set; }
+        public User User { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -28,10 +28,9 @@ namespace SimpleBank.Pages.BankAccounts
                 return NotFound();
             }
 
-            BankAccount = await _context.BankAccount
-                .Include(b => b.User).FirstOrDefaultAsync(m => m.BankAccountID == id);
+            User = await _context.User.FirstOrDefaultAsync(m => m.UserID == id);
 
-            if (BankAccount == null)
+            if (User == null)
             {
                 return NotFound();
             }

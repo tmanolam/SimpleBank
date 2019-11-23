@@ -1,0 +1,60 @@
+﻿@page
+@model SimpleBank.Pages.Transactions.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Transaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Transaction.TransactionID" />
+            <div class="form-group">
+                <label asp-for="Transaction.BankAccountID" class="control-label"></label>
+                <select asp-for="Transaction.BankAccountID" class="form-control" asp-items="ViewBag.BankAccountID"></select>
+                <span asp-validation-for="Transaction.BankAccountID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaction.CreditType" class="control-label"></label>
+                <input asp-for="Transaction.CreditType" class="form-control" />
+                <span asp-validation-for="Transaction.CreditType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaction.DebitType" class="control-label"></label>
+                <input asp-for="Transaction.DebitType" class="form-control" />
+                <span asp-validation-for="Transaction.DebitType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaction.Amount" class="control-label"></label>
+                <input asp-for="Transaction.Amount" class="form-control" />
+                <span asp-validation-for="Transaction.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaction.PreviousBalance" class="control-label"></label>
+                <input asp-for="Transaction.PreviousBalance" class="form-control" />
+                <span asp-validation-for="Transaction.PreviousBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Transaction.NewBalance" class="control-label"></label>
+                <input asp-for="Transaction.NewBalance" class="form-control" />
+                <span asp-validation-for="Transaction.NewBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

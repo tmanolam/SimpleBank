@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleBank.Data;
 using SimpleBank.Models;
 
-namespace SimpleBank.Pages.BankAccounts
+namespace SimpleBank.Pages.Users
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace SimpleBank.Pages.BankAccounts
         }
 
         [BindProperty]
-        public BankAccount BankAccount { get; set; }
+        public User User { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -30,14 +30,12 @@ namespace SimpleBank.Pages.BankAccounts
                 return NotFound();
             }
 
-            BankAccount = await _context.BankAccount
-                .Include(b => b.User).FirstOrDefaultAsync(m => m.BankAccountID == id);
+            User = await _context.User.FirstOrDefaultAsync(m => m.UserID == id);
 
-            if (BankAccount == null)
+            if (User == null)
             {
                 return NotFound();
             }
-           ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
             return Page();
         }
 
@@ -50,7 +48,7 @@ namespace SimpleBank.Pages.BankAccounts
                 return Page();
             }
 
-            _context.Attach(BankAccount).State = EntityState.Modified;
+            _context.Attach(User).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +56,7 @@ namespace SimpleBank.Pages.BankAccounts
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BankAccountExists(BankAccount.BankAccountID))
+                if (!UserExists(User.UserID))
                 {
                     return NotFound();
                 }
@@ -71,9 +69,9 @@ namespace SimpleBank.Pages.BankAccounts
             return RedirectToPage("./Index");
         }
 
-        private bool BankAccountExists(string id)
+        private bool UserExists(string id)
         {
-            return _context.BankAccount.Any(e => e.BankAccountID == id);
+            return _context.User.Any(e => e.UserID == id);
         }
     }
 }

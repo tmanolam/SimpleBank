@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleBank.Data;
 using SimpleBank.Models;
 
-namespace SimpleBank.Pages.BankAccounts
+namespace SimpleBank.Pages.Transactions
 {
     public class EditModel : PageModel
     {
@@ -21,23 +21,23 @@ namespace SimpleBank.Pages.BankAccounts
         }
 
         [BindProperty]
-        public BankAccount BankAccount { get; set; }
+        public Transaction Transaction { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            BankAccount = await _context.BankAccount
-                .Include(b => b.User).FirstOrDefaultAsync(m => m.BankAccountID == id);
+            Transaction = await _context.Transaction
+                .Include(t => t.Account).FirstOrDefaultAsync(m => m.TransactionID == id);
 
-            if (BankAccount == null)
+            if (Transaction == null)
             {
                 return NotFound();
             }
-           ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
+           ViewData["BankAccountID"] = new SelectList(_context.BankAccount, "BankAccountID", "BankAccountID");
             return Page();
         }
 
@@ -50,7 +50,7 @@ namespace SimpleBank.Pages.BankAccounts
                 return Page();
             }
 
-            _context.Attach(BankAccount).State = EntityState.Modified;
+            _context.Attach(Transaction).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace SimpleBank.Pages.BankAccounts
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BankAccountExists(BankAccount.BankAccountID))
+                if (!TransactionExists(Transaction.TransactionID))
                 {
                     return NotFound();
                 }
@@ -71,9 +71,9 @@ namespace SimpleBank.Pages.BankAccounts
             return RedirectToPage("./Index");
         }
 
-        private bool BankAccountExists(string id)
+        private bool TransactionExists(int id)
         {
-            return _context.BankAccount.Any(e => e.BankAccountID == id);
+            return _context.Transaction.Any(e => e.TransactionID == id);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleBank.Data;
 using SimpleBank.Models;
 
-namespace SimpleBank.Pages.BankAccounts
+namespace SimpleBank.Pages.Users
 {
     public class IndexModel : PageModel
     {
@@ -19,12 +19,11 @@ namespace SimpleBank.Pages.BankAccounts
             _context = context;
         }
 
-        public IList<BankAccount> BankAccount { get;set; }
+        public IList<User> User { get;set; }
 
         public async Task OnGetAsync()
         {
-            BankAccount = await _context.BankAccount
-                .Include(b => b.User).ToListAsync();
+            User = await _context.User.ToListAsync();
         }
     }
 }

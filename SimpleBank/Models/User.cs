@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace SimpleBank.Models
 {
-    public class BankAccount
+    public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string BankAccountID { get; set; }
         public string UserID { get; set; }
-        public double Balance { get; set; }
-        public User User { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public ICollection<BankAccount> BankAccounts { get; set; }
     }
 }
