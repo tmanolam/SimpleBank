@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Transaction[0].TransactionDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Transaction[0].CreditType)
             </th>
             <th>
@@ -37,6 +40,9 @@
     <tbody>
 @foreach (var item in Model.Transaction) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreditType)
             </td>

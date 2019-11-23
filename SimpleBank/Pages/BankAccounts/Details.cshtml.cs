@@ -29,7 +29,10 @@ namespace SimpleBank.Pages.BankAccounts
             }
 
             BankAccount = await _context.BankAccount
-                .Include(b => b.User).FirstOrDefaultAsync(m => m.BankAccountID == id);
+                .Include(b => b.User)
+                .Include(b => b.Transactions)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.BankAccountID == id);
 
             if (BankAccount == null)
             {

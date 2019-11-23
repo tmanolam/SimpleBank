@@ -23,6 +23,7 @@ namespace SimpleBank.Models
     {
         public int TransactionID { get; set; }
         public string BankAccountID { get; set; }
+        public DateTime TransactionDate { get; set; }
         public CreditType? CreditType { get; set; }
         public DebitType? DebitType { get; set; }
         public double Amount { get; set; }

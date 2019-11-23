@@ -19,20 +19,6 @@ namespace SimpleBank.Pages.BankAccounts
             _context = context;
         }
 
-        /*
-        public IActionResult OnGet(string userId)
-        {
-            UserID = userId;
-
-            if (userId != null)
-                ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID", userId);
-            else
-                ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
-
-            return Page();
-        }
-        */
-
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)

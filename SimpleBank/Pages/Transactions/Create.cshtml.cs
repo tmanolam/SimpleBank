@@ -19,14 +19,34 @@ namespace SimpleBank.Pages.Transactions
             _context = context;
         }
 
+        /*
         public IActionResult OnGet()
         {
         ViewData["BankAccountID"] = new SelectList(_context.BankAccount, "BankAccountID", "BankAccountID");
             return Page();
         }
+        */
+
+        public async Task<IActionResult> OnGetAsync(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            BankAccount = await _context.BankAccount.FindAsync(id);
+
+            if (BankAccount == null)
+            {
+                return NotFound();
+            }
+            return Page();
+        }
 
         [BindProperty]
         public Transaction Transaction { get; set; }
+
+        public BankAccount BankAccount { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

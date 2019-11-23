@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Transaction.BankAccountID" class="control-label"></label>
-                <select asp-for="Transaction.BankAccountID" class ="form-control" asp-items="ViewBag.BankAccountID"></select>
+                <input readonly asp-for="Transaction.BankAccountID" class="form-control" value="@Model.BankAccount.BankAccountID"/>
             </div>
             <div class="form-group">
                 <label asp-for="Transaction.CreditType" class="control-label"></label>
@@ -33,14 +33,9 @@
                 <span asp-validation-for="Transaction.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Transaction.PreviousBalance" class="control-label"></label>
-                <input asp-for="Transaction.PreviousBalance" class="form-control" />
-                <span asp-validation-for="Transaction.PreviousBalance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Transaction.NewBalance" class="control-label"></label>
-                <input asp-for="Transaction.NewBalance" class="form-control" />
-                <span asp-validation-for="Transaction.NewBalance" class="text-danger"></span>
+                <input type="hidden" asp-for="Transaction.PreviousBalance" class="form-control" />
+                <input type="hidden" asp-for="Transaction.NewBalance" class="form-control" />
+                <input type="hidden" asp-for="Transaction.TransactionDate" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -50,7 +45,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/BankAccounts/Details" asp-route-id="@Model.BankAccount.BankAccountID">Back to Account</a>
 </div>
 
 @section Scripts {

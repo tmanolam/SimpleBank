@@ -9,8 +9,18 @@
 
 <div>
     <h4>BankAccount</h4>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.BankAccount.BankAccountID">Edit</a> |
+        <a asp-page="/Users/Details" asp-route-id="@Model.BankAccount.UserID">Back to User Details</a>
+    </div>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankAccount.BankAccountID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankAccount.BankAccountID)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BankAccount.Balance)
         </dt>
@@ -26,6 +36,52 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.BankAccount.BankAccountID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="/Transactions/Create" asp-route-id="@Model.BankAccount.BankAccountID">Deposit</a> |
+    <a asp-page="/Transactions/Create" asp-route-id="@Model.BankAccount.BankAccountID">Withdraw</a> |
+    <a asp-page="/Transactions/Create" asp-route-id="@Model.BankAccount.BankAccountID">Transfer</a>
+</div>
+<div>
+    <h4>Transactions</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Credit Type</th>
+                <th>Debit Type</th>
+                <th>Amount</th>
+                <th>Previous Balance</th>
+                <th>New Balance</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BankAccount.Transactions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreditType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DebitType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PreviousBalance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NewBalance)
+                    </td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.TransactionID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>
