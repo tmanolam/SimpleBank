@@ -19,14 +19,39 @@ namespace SimpleBank.Pages.BankAccounts
             _context = context;
         }
 
-        public IActionResult OnGet()
+        /*
+        public IActionResult OnGet(string userId)
         {
-        ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
+            UserID = userId;
+
+            if (userId != null)
+                ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID", userId);
+            else
+                ViewData["UserID"] = new SelectList(_context.User, "UserID", "UserID");
+
+            return Page();
+        }
+        */
+
+        public async Task<IActionResult> OnGetAsync(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            User = await _context.User.FindAsync(id);
+
+            if (User == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
 
         [BindProperty]
         public BankAccount BankAccount { get; set; }
+        public User User { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -40,7 +65,7 @@ namespace SimpleBank.Pages.BankAccounts
             _context.BankAccount.Add(BankAccount);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Users/Details", new { id = BankAccount.UserID });
         }
     }
 }

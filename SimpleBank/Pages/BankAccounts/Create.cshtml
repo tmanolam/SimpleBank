@@ -20,12 +20,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="BankAccount.UserID" class="control-label"></label>
-                <select asp-for="BankAccount.UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+                <input readonly asp-for="BankAccount.UserID" class="form-control" value="@Model.User.UserID"/>
+                <!--select asp-for="BankAccount.UserID" class="form-control" asp-items="ViewBag.UserID"></!select-->
             </div>
             <div class="form-group">
-                <label asp-for="BankAccount.Balance" class="control-label"></label>
-                <input asp-for="BankAccount.Balance" class="form-control" />
-                <span asp-validation-for="BankAccount.Balance" class="text-danger"></span>
+                <input hidden asp-for="BankAccount.Balance" class="form-control" value="0" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -35,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/Users/Details" asp-route-id="@Model.User.UserID">Back to User Details</a>
 </div>
 
 @section Scripts {

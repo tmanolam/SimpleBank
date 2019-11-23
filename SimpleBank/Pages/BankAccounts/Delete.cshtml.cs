@@ -54,7 +54,7 @@ namespace SimpleBank.Pages.BankAccounts
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Users/Details", new { id = BankAccount.UserID });
         }
     }
 }

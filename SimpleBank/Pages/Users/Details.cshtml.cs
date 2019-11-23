@@ -28,7 +28,10 @@ namespace SimpleBank.Pages.Users
                 return NotFound();
             }
 
-            User = await _context.User.FirstOrDefaultAsync(m => m.UserID == id);
+            User = await _context.User
+                .Include(u => u.BankAccounts)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.UserID == id);
 
             if (User == null)
             {
